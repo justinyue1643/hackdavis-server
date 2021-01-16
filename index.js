@@ -29,7 +29,7 @@ app.get("/add-phone-number", (req, res) => {
 
 })
 
-app.post("/sms", (req, res) => {
+app.post("/send-message", (req, res) => {
     /*const message = req.body;
     for (let i = 0; i < phoneNumbers.length; i++) {
         client.messages
