@@ -31,6 +31,10 @@ app.post("/send-message", (req, res) => {
     const twiml = new MessagingResponse();
     const userMessage = req.body.Body;
 
+    if (req.body.Body == 'hello') {
+        twiml.message("Hi back!");
+    }
+
     console.log(userMessage);
 
     twiml.message("Thank you for the thoughtful response. Your message will be posted shortly.");
