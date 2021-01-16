@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser');
 app.use(express.json());
+
+app.use(bodyParser.urlencoded({extended: false}));
 require('dotenv').config()
 
 const accountSid = process.env.ACCOUNT_SSID;
