@@ -34,10 +34,13 @@ app.post("/send-message", (req, res) => {
     if (req.body.Body == 'hello') {
         twiml.message("Hi back!");
     }
+    else {
+        twiml.message('bwoah');
+    }
 
     console.log(userMessage);
 
-    twiml.message("Thank you for the thoughtful response. Your message will be posted shortly.");
+    //twiml.message("Thank you for the thoughtful response. Your message will be posted shortly.");
 
     res.writeHead(200, {'Content-Type': 'text/xml'});
     res.end(twiml.toString());
