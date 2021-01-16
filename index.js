@@ -13,7 +13,7 @@ const MessagingResponse = require('twilio').twiml.MessagingResponse;
 allPhoneNumbers = ["+17142092509", "+17142347559"]
 cronJob = require('cron').CronJob;
 
-var textJob = new cronJob('12 50 * * *', function(){
+var textJob = new cronJob('57 12 * * *', function(){
     for (let i = 0; i < allPhoneNumbers.length; i++) {
         client.messages.create({
             body: "Your daily question: Do you question the nature of your reality?",
@@ -22,6 +22,8 @@ var textJob = new cronJob('12 50 * * *', function(){
         })
     }
 })
+
+textJob.start();
 
 app.listen(process.env.PORT, () => {
     console.log("Listening on port " + process.env.PORT);
