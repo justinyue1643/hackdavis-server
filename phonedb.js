@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Text = require('./text.js')
+const Text = require('./mongo_schemas/text.js')
 
 const uri = "mongodb+srv://hackuci_storms_hackdavis:somebasicpassword@cluster0.bylf6.mongodb.net/therapme?retryWrites=true&w=majority";
 // pw: somebasicpassword
