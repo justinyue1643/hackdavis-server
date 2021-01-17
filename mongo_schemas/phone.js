@@ -21,4 +21,3 @@ const textEntrySchema = new Schema({
 const Phone = mongoose.model('Phone', textEntrySchema)
 
 module.exports = Phone
-

@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 
 const phoneRoute = require('./routes/phoneRoute');
 const textRoute = require('./routes/textRoute');
+const questionRoute = require('./routes/questionRoute');
 
 const app = express()
 const bodyParser = require('body-parser');
@@ -81,6 +82,7 @@ app.post("/echo", (req, res) => {
 
 app.use('/phone-number', phoneRoute);
 app.use('/text', textRoute);
+app.use('/question', questionRoute);
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => console.log('connected to the database'))
