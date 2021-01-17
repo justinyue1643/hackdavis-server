@@ -22,13 +22,13 @@ const uri = "mongodb+srv://hackuci_storms_hackdavis:somebasicpassword@cluster0.b
 
 cronJob = require('cron').CronJob;
 
-var textJob = new cronJob('43 21 * * *', function () {
+var textJob = new cronJob('40 09 * * *', function () {
     Phone.find((err, phoneNumber) => {
         try {
             for (let i = 0; i < phoneNumber.length; i++) {
                 console.log(phoneNumber[i]);
                 client.messages.create({
-                    body: "Your daily question: Do you question the nature of your reality?",
+                    body: "When was the last time you felt lucky about yourself and why?",
                     from: "+17135615426",
                     to: phoneNumber[i].phone
                 })
