@@ -63,16 +63,16 @@ app.post("/send-message", (req, res) => {
         response: userMessage
     });
 
-    newText.save()
-        .then(() => res.json("Successfully saved"))
-        .catch((err) => res.status(400).json("Error: " + err));
-
     console.log(userMessage);
     twiml.message('Thank you for your thoughtful response. Your message will be posted on the board shortly');
 
 
     res.writeHead(200, {'Content-Type': 'text/xml'});
     res.end(twiml.toString());
+
+    newText.save()
+        .then(() => res.json("Successfully saved"))
+        .catch((err) => res.status(400).json("Error: " + err));
 })
 
 app.post("/echo", (req, res) => {
