@@ -7,7 +7,7 @@ const textRoute = require('./routes/textRoute');
 const app = express()
 const bodyParser = require('body-parser');
 app.use(express.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 require('dotenv').config();
 
 const accountSid = process.env.ACCOUNT_SSID;
@@ -22,18 +22,23 @@ const uri = "mongodb+srv://hackuci_storms_hackdavis:somebasicpassword@cluster0.b
 
 cronJob = require('cron').CronJob;
 
-var textJob = new cronJob('57 12 * * *', function(){
-    var allPhoneNumbers = Phone.find()
-                                .then((phoneNumbers) => res.json(phoneNumbers))
-                                .catch((err) => res.status(400).json("Error: " + err));
+var textJob = new cronJob('43 21 * * *', function () {
+    Phone.find((err, phoneNumber) => {
+        try {
+            for (let i = 0; i < phoneNumber.length; i++) {
+                console.log(phoneNumber[i]);
+                client.messages.create({
+                    body: "Your daily question: Do you question the nature of your reality?",
+                    from: "+17135615426",
+                    to: phoneNumber[i].phone
+                })
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    });
 
-    for (let i = 0; i < allPhoneNumbers.length; i++) {
-        client.messages.create({
-            body: "Your daily question: Do you question the nature of your reality?",
-            from: "+17135615426",
-            to: allPhoneNumbers[i].phone
-        })
-    }
 })
 
 textJob.start();
@@ -47,10 +52,6 @@ app.get("/", (req, res) => {
         })
         .then(message => console.log(message))
     res.send("Index Endpoint: Message successfully sent!");
-})
-
-app.get("/add-phone-number", (req, res) => {
-
 })
 
 app.post("/send-message", (req, res) => {
@@ -70,7 +71,7 @@ app.post("/send-message", (req, res) => {
     console.log(userMessage);
     twiml.message('Thank you for your thoughtful response. Your message will be posted on the board shortly');
 
-    res.writeHead(200, {'Content-Type': 'text/xml'});
+    res.writeHead(200, { 'Content-Type': 'text/xml' });
     res.end(twiml.toString());
 })
 
@@ -81,7 +82,7 @@ app.post("/echo", (req, res) => {
 app.use('/phone-number', phoneRoute);
 app.use('/text', textRoute);
 
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => console.log('connected to the database'))
     .catch((err) => console.log(err));
 
