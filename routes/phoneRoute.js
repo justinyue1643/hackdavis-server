@@ -1,6 +1,6 @@
 const router = require("express").Router()
 const Phone = require("../mongo_schemas/phone.js");
-require('dotenv').config();
+// require('dotenv').config();
 
 
 const accountSid = process.env.ACCOUNT_SSID;
